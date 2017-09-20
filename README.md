@@ -1,5 +1,7 @@
 ## Mac Os Utility
 
-Module contains the following functions:
-1. `change_desktop_background(file)`
-2. `manage_cmd_process(pid, limit_seconds)` 
+homepage: http://www.rubydoc.info/gems/macos_utility/
+
+Interface
+1. `MacosUtility.change_desktop_background(file)`
+2. `MacosUtility.manage_cmd_process(pid, limit_seconds)` 
