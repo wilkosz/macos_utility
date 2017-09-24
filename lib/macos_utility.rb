@@ -1,6 +1,6 @@
 require 'timeout'
 require 'macos_utility/constants'
-require 'macos_utility/process_obj.rb'
+require 'macos_utility/process_obj'
 # Main MacosUtility module, a static module used for handling Mac Operating System functionality
 
 module MacosUtility
@@ -24,7 +24,7 @@ module MacosUtility
   #   process_id: (Integer)
 
   def self.get_processes(process_name: nil, process_id: nil)
-    command = "ps aux "
+    command = "ps aux"
     command += " | grep #{process_name}" if process_name
     r, w = IO.pipe
 
@@ -34,13 +34,14 @@ module MacosUtility
     w.close
     stream = r.read.split(/\n/)
     r.close
-    stream.shift
+
+    stream.shift unless process_name
+    stream.select! {|result| result.split(' ').length == 11 && !result.match(/(grep)/)}
 
     processes = stream.map do |itm|
       # USER               PID  %CPU %MEM      VSZ    RSS   TT  STAT STARTED      TIME COMMAND
       # joshuawilkosz      313   8.6  5.4 14763108 900940   ??  R     9:49PM   3:27.95 /Applications/RubyMine.app/Contents/MacOS/rubymine -psn_0_69649
       args = itm.split(' ')
-      return if args.length < 11 || args[10].match(/(grep)/)
       ProcessObj.new(
           args[0],
           args[1].to_i,
@@ -56,7 +57,11 @@ module MacosUtility
       )
     end
     processes.select! {|process| process.pid == process_id} if process_id && process_name.nil?
-    processes
+    if process_name || process_id
+      processes.first
+    else
+      processes
+    end
   end
 
   # Kill a running process
@@ -76,8 +81,9 @@ module MacosUtility
     pid = begin_process(command, out: w)
 
     w.close
-    stream = r.read.split(/\n/)
+    result = r.read
     r.close
+    result
   end
 
   # Change desktop background

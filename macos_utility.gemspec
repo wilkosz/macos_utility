@@ -17,11 +17,11 @@ Gem::Specification.new do |spec|
       'lib/macos_utility/process_obj.rb',
       'test/test_macos_utility.rb'
   ]
-  spec.require_paths = ['lib']
+  spec.require_paths = ['lib','lib/macos_utility']
   spec.license       = 'Nonstandard'
   spec.add_development_dependency 'bundler', '~> 1.14'
   spec.add_development_dependency 'rake', '~> 10.5'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'minitest', '~> 5.10'
-  spec.add_dependency 'timeout', '0.0.1'
+  spec.add_dependency 'timeout', '0.0'
 end

@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    macos_utility (0.0.2)
+    macos_utility (0.0.4)
+      timeout (= 0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -22,6 +23,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    timeout (0.0.0)
 
 PLATFORMS
   ruby
@@ -29,8 +31,8 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.14)
   macos_utility!
-  minitest
-  rake (~> 10.5.0)
+  minitest (~> 5.10)
+  rake (~> 10.5)
   rspec (~> 3.0)
 
 BUNDLED WITH
