@@ -9,16 +9,17 @@ class TestMacosUtility < MiniTest::Test
     end
     skip("No mac background images found!") unless list.length > 0
     status = MacosUtility.change_desktop_background(list[0])
-    assert_kind_of(Fixnum, status[0], "PID must be a Fixnum class")
+    assert_kind_of(Integer, status[0], "PID must be a Fixnum class")
   end
 
   def test_get_processes
     processes = MacosUtility.get_processes
+
     assert_equal(true, processes.length > 0)
-    assert_kind_of(Fixnum, processes[0].pid)
+    assert_kind_of(Integer, processes[0].pid)
     assert_kind_of(Float, processes[0].cpu)
     assert_kind_of(Float, processes[0].mem)
-    assert_kind_of(Fixnum, processes[0].vsz)
-    assert_kind_of(Fixnum, processes[0].rss)
+    assert_kind_of(Integer, processes[0].vsz)
+    assert_kind_of(Integer, processes[0].rss)
   end
 end

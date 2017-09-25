@@ -1,6 +1,7 @@
 require 'timeout'
 require 'macos_utility/constants'
 require 'macos_utility/process_obj'
+
 # Main MacosUtility module, a static module used for handling Mac Operating System functionality
 
 module MacosUtility
